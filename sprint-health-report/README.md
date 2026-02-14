@@ -121,20 +121,9 @@ The agent matches your request to the CSV by exact or fuzzy project name, or inf
 
 ## Parking Lot
 
-Ideas and enhancements under consideration.
-
-### Metrics & Features
-- [ ] SAFe metrics: PI Predictability, Feature cycle time, Program velocity
-- [ ] "vs. last report" delta mode
-- [ ] Per-BU rollups for VP-level reporting
-- [ ] Multi-BU aggregate reporting — compare health across business units for executive-level views
+- [ ] SAFe metrics: PI Predictability, Feature cycle time, Program velocity — once data is available in the CSV
+- [ ] BU-level rollups and cross-BU comparison for VP-level reporting
 - [ ] Threshold tuning by project maturity
-- [ ] DORA metrics once deployment data is reliable
-- [ ] NPS as Tier 2 when consistently captured
-- [ ] Group auto-detection from BU + sprint cadence (no registry)
+- [ ] DORA metrics — once deployment data is reliably captured
+- [ ] NPS as Tier 2 — once consistently captured
 - [ ] Automation: email/Slack delivery, lean web app, scheduled runs
-
-### Scripts (optional helpers)
-- [ ] **CSV Preprocessor** — Convert European number format to standard format (`92,51 %` → `92.51%`), normalize dates, strip NBSP characters. Would eliminate manual preprocessing step.
-- [ ] **CSV Validator** — Check required columns, validate data types, identify in-progress sprints, flag suspicious values (coverage >100%, negatives). Provides early error detection.
-- [ ] **Threshold Calculator** — Analyze historical CSV data to suggest custom thresholds based on percentiles/distributions per project or portfolio. Data-driven threshold tuning.
