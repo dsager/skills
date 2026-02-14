@@ -2,6 +2,8 @@
 
 A skill that analyzes sprint-level CSV data and generates project health reports for status meetings.
 
+**Quick reference:** [QUICKREF.md](QUICKREF.md) — Essential patterns, thresholds, commands for fast lookup.
+
 **Full spec & workflow:** [SKILL.md](SKILL.md) — parameters, CSV schema, workflow.
 
 **Reference files:**
