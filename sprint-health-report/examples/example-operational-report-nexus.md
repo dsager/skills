@@ -30,6 +30,13 @@
 1. **Lock in delivery stability** — Keep commitment discipline that produced 78–75% in S102–S103; consider same target band for next sprint. Owner: Scrum Master / PM.
 2. **Optional** — If volatility recurs, capture context in sprint title (e.g. dependency, holiday) for future report clarity.
 
+## 💬 Slack Drafts
+
+### Team Lead: [name]
+> Hey [name], quick one on Nexus — delivery has stabilised nicely at 75–78% the last two sprints, which is great after the 35% dip in S99. Wanted to check: do you have a sense of what caused the swings earlier (scope changes, dependencies, capacity)? Would be good to capture that so we can flag it in future reports if it pops up again.
+
+*(Product Owner and Agile Coach: no actionable topics this sprint — Nexus is in good shape.)*
+
 ## Data Quality
 
 - All key metrics reported for last completed sprint; no exclusions.

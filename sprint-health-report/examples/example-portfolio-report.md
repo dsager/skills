@@ -65,3 +65,32 @@ All five active projects are in scope. One project is at risk (Pulse — deliver
 | 1 | 🚨 | Verify Pulse last-sprint data; triage open bugs | Pulse |
 | 2 | ⚠️ | Bring Sprint % into 75–115% band | Atlas |
 | 3 | ⚠️ | Reduce overcommit and raise coverage toward 85% | Depot |
+
+---
+
+## 💬 Slack Drafts
+
+### Pulse
+
+#### Team Lead: [name]
+> Hey [name], the Sprint 128 numbers for Pulse look unusual — delivery came in at 231% (113 completed vs 49 planned). Was that a bulk release or maybe a target that didn't get updated? Also, open bugs are sitting at 10 right now. Can you give me a quick read on both before I put this into the exec report?
+
+#### Product Owner: [name]
+> Hey [name], heads up on Pulse — there are 10 open bugs as of Sprint 128, up from where it was trending. Are any of these blocking or customer-facing? Want to make sure we're prioritising the right things for next sprint.
+
+### Atlas
+
+#### Team Lead: [name]
+> Hey [name], Atlas came in at 67% delivery last sprint (33 of 49 points). That's a bit below the 75% we'd like to see. Is this a capacity thing or were some items harder than estimated? Just want to understand so we can calibrate the next sprint target.
+
+### Depot
+
+#### Team Lead: [name]
+> Hey [name], two things on Depot:
+> - Delivery was 138% last sprint (54 of 39 planned) — are we underestimating targets or pulling in extra work mid-sprint?
+> - Test coverage dropped to 75%, which puts it in the watch zone. Any plan to bring that back up toward 85%?
+
+#### Product Owner: [name]
+> Hey [name], Depot has been running hot on delivery — 138% last sprint, and it's been over 100% a few times recently. Might be worth reviewing whether the sprint targets reflect actual capacity, so we get a cleaner picture of what the team can commit to.
+
+*(Agile Coach: no process or mood concerns flagged this cycle — all teams reporting mood ≥7.2. Nexus and Quest are healthy with no actionable topics.)*
