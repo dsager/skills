@@ -1,0 +1,28 @@
+# On release publish, build a zip of the sprint-health-report skill and upload it as a release asset.
+# Users can download sprint-health-report-<tag>.zip and extract into .cursor/skills/ or project root.
+
+name: Release skill zip
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip-skill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Zip sprint-health-report
+        run: |
+          zip -r "sprint-health-report-${{ github.event.release.tag_name }}.zip" sprint-health-report/
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: sprint-health-report-${{ github.event.release.tag_name }}.zip
