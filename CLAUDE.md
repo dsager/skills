@@ -12,20 +12,14 @@ Currently contains one skill: **sprint-health-report**.
 
 Each skill lives in its own directory with a required `SKILL.md` entry point, plus optional `templates/` and `examples/` subdirectories. There is no build system, package manager, or test suite — skills are prompt-based specifications (markdown files), not executable code.
 
-**Modular organization**: Skills use reference files (prefixed with `_`) to consolidate common patterns, conventions, and rules. This reduces duplication and provides a stable base for agents.
-
 ## sprint-health-report
 
 Analyzes sprint-level CSV data and generates project health reports for status meetings. The skill defines a structured 4-step workflow: Operational report → Review → Executive report → Stakeholder report.
 
 Key files:
-- `sprint-health-report/SKILL.md` — Entry point: workflow, parameters, CSV schema
-- `sprint-health-report/_shared-conventions.md` — Common patterns: emoji, labeling, qualifiers, audience filters
-- `sprint-health-report/_template-fragments.md` — Reusable formatting patterns
-- `sprint-health-report/_data-reference.md` — Thresholds, scoring logic, heuristics
+- `sprint-health-report/SKILL.md` — Full spec: parameters, CSV schema, health thresholds, scoring logic, fact-check rules
 - `sprint-health-report/templates/` — Output templates per audience (operational, executive, stakeholder)
 - `sprint-health-report/examples/` — Sample CSV input and generated reports (report date: 15 Feb 2026, fictional projects: Pulse, Nexus, Atlas, Depot, Quest)
-- `sprint-health-report/ARCHITECTURE.md` — File organization and design principles
 
 ### Important design decisions
 

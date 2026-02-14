@@ -1,6 +1,6 @@
 # Executive Slide Deck Template
 
-Use this structure for `audience: executive` HTML slide decks. See [_template-fragments.md](../../_template-fragments.md) for formatting patterns.
+Use this structure for `audience: executive` HTML slide decks.
 
 ---
 
@@ -11,15 +11,14 @@ Use this structure for `audience: executive` HTML slide decks. See [_template-fr
 - **Bullets ≤5 per slide**, each ≤15 words
 - **Graphs where possible** instead of tables
 - **Every problem has a solution** attached
+- **Consistent emoji** as visual anchors (see SKILL.md)
 - Dark theme, clean layout, readable at projection size
 
-## Conventions
+## Language
 
-See [_shared-conventions.md](../../_shared-conventions.md) for:
-- Emoji usage and visual anchors
-- Metric labeling (e.g., Sprint % → Delivery Rate)
-- Qualifier patterns (solution-oriented, ≤5 words)
-- What to omit in executive view
+Use plain language for metrics. Avoid internal jargon when a clearer term exists:
+- "Sprint %" → **Delivery Rate** (completed vs planned story points) — label charts and tables accordingly
+- Keep standard SAFe terms (PI, ART) where the audience expects them
 
 ## Slide Structure
 
@@ -36,11 +35,16 @@ See [_shared-conventions.md](../../_shared-conventions.md) for:
 [H2] Project Health
 
 [3-column card grid, one per project]
-Each card (see [_template-fragments.md](../../_template-fragments.md) for format):
-  - Project name + health badge (✅ HEALTHY / ⚠️ WATCH / 🚨 AT RISK)
+Each card:
+  - Project name + badge (✅ HEALTHY / ⚠️ WATCH / 🚨 AT RISK)
   - 3-4 key metrics only: Delivery, Security, Coverage, Team
   - Each metric: emoji status + value + brief qualifier
-  - Qualifiers per [_shared-conventions.md](../../_shared-conventions.md)
+  - e.g., "✅ 82%" or "🔒 4 overdue — scheduled"
+
+Keep qualifiers under 5 words. Solution-oriented:
+  ✅ "82%"            (no qualifier needed)
+  ⚠️ "84% — recovery planned"  (not "dropped 8pp")
+  🚨 "50% — dep. blocked"      (not "critically low")
 ```
 
 ### Slide 3: Delivery Trajectory
@@ -95,3 +99,13 @@ Each:
 - Print-friendly: `@media print` shows all slides
 - Consistent slide height: use `flex: 1; align-content: center` for content areas
 - Embedded SVG for charts (no JS charting libraries needed)
+
+## What to Omit in Executive View
+
+- 🟠 Unverified alerts (fact-check filtered)
+- Data quality issues / tooling problems
+- Individual personal situations (mood drops with personal cause)
+- Raw metric tables with all columns
+- Sprint-level volatility detail (show trend line instead)
+- Speculative root causes
+- Anything that has a context annotation marking it as resolved

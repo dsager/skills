@@ -1,6 +1,6 @@
 # Operational Report Template
 
-Use this structure for `audience: operational` reports. See [_template-fragments.md](../../_template-fragments.md) for formatting patterns.
+Use this structure for `audience: operational` reports.
 
 ---
 
@@ -17,9 +17,6 @@ Use this structure for `audience: operational` reports. See [_template-fragments
 | Critical Bugs | T1 | 0 | = | ➡️ stable | ✅ | 🔵 |
 | Security Overdue | T1 | 4 | +4 | 📉 new | 🚨 | 🟠 VERIFY |
 | ... | | | | | | |
-```
-
-See [_template-fragments.md](../../_template-fragments.md) for metric table format.
 
 ## 👍 What's Going Well
 - [Concrete observation backed by data]
@@ -96,5 +93,7 @@ After per-project sections, add:
 - Back every claim with a data point
 - Show all confidence levels (🔵 and 🟠)
 - Include fact-check exclusions in Data Quality section
-- See [_shared-conventions.md](../../_shared-conventions.md) for emoji usage, metric labeling, and project naming
+- Use emoji consistently per the conventions in SKILL.md
+- Project names exactly as they appear in the data
+- Group or ART names as the user or context provides (no registry)
 - End with "Ready for your review" to prompt Step 2
