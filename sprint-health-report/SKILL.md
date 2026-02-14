@@ -17,9 +17,9 @@ Generates actionable executive summaries of software development project health 
 |------|---------|
 | `SKILL.md` | This file. Entry point, analysis logic, prompt template. |
 | `README.md` | How to use the skill: workflow, commands, tips. |
-| `templates/operational-report.md` | Template for Operational report. |
-| `templates/executive-report.md` | Template for Executive HTML slide deck. |
-| `templates/stakeholder-report.md` | Template for Stakeholder report. |
+| `assets/templates/operational-report.md` | Template for Operational report. |
+| `assets/templates/executive-report.md` | Template for Executive HTML slide deck. |
+| `assets/templates/stakeholder-report.md` | Template for Stakeholder report. |
 | `examples/` | Sample outputs for reference. |
 
 **Start here**: Read this file for the analysis spec. See [README.md](README.md) for detailed workflow and tips.
