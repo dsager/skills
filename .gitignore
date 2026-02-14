@@ -1,0 +1,12 @@
+# Agent/editor local config (not part of skill spec)
+.claude/
+.cursor/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Editor swap/backup
+*.swp
+*.swo
+*~
