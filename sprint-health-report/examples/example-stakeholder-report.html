@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stakeholder Status Report — General-Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #1a1a2e;
+    --bg-card:   #16213e;
+    --text:      #e8e8f0;
+    --text-dim:  #9a9ab0;
+    --accent:    #4fc3f7;
+    --green:     #66bb6a;
+    --yellow:    #fdd835;
+    --red:       #ef5350;
+    --border:    #2a2a4a;
+    --font:      'Inter', system-ui, -apple-system, sans-serif;
+
+    --c-atlas:   #ffa726;
+    --c-depot:   #66bb6a;
+    --c-nexus:   #4fc3f7;
+  }
+
+  html, body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ── Progress bar ───────────────────────────────────── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+    z-index: 100;
+  }
+
+  /* ── Nav hint ───────────────────────────────────────── */
+  .nav-hint {
+    position: fixed;
+    bottom: 20px;
+    left: 24px;
+    font-size: 12px;
+    color: var(--text-dim);
+    opacity: 0.5;
+    z-index: 100;
+  }
+
+  /* ── Slide number ───────────────────────────────────── */
+  .slide-number {
+    position: fixed;
+    bottom: 20px;
+    right: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    z-index: 100;
+  }
+
+  /* ── Slides ─────────────────────────────────────────── */
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 60px 80px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .slide.active {
+    display: flex;
+  }
+
+  /* ── Title slide ────────────────────────────────────── */
+  .slide-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .slide h1 {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .slide-subtitle {
+    font-size: 20px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .slide-meta {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+
+  .key-message {
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 720px;
+    color: var(--text);
+    opacity: 0.85;
+  }
+
+  /* ── Content slides ─────────────────────────────────── */
+  .slide h2 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .h2-subtitle {
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+
+  /* ── Variant A card grid (from design exploration) ──── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .va-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 24px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .va-card .spark-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .va-card .card-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .va-card .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .va-card .project-name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .va-card .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-healthy { background: rgba(102, 187, 106, 0.15); color: var(--green); }
+  .badge-watch   { background: rgba(253, 216, 53, 0.15); color: var(--yellow); }
+  .badge-risk    { background: rgba(239, 83, 80, 0.15); color: var(--red); }
+
+  .va-card .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .va-card .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .va-card .metric-label {
+    color: var(--text-dim);
+  }
+
+  .va-card .metric-value {
+    font-weight: 600;
+  }
+
+  /* ── List cards (slides 3-5) ────────────────────────── */
+  .content-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 800px;
+  }
+
+  .content-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .content-card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .content-card .card-body-text {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .content-card .card-status {
+    font-size: 13px;
+    margin-top: 6px;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  /* ── Two-column risk layout ─────────────────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 900px;
+  }
+
+  .col-header {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+    color: var(--text-dim);
+  }
+
+  /* ── Action items ───────────────────────────────────── */
+  .action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 800px;
+  }
+
+  .action-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .action-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .action-text {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .action-owner {
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  .closing-message {
+    margin-top: 32px;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 720px;
+    opacity: 0.85;
+  }
+
+  /* ── Print ──────────────────────────────────────────── */
+  @media print {
+    html, body { overflow: visible; height: auto; }
+    .slide { display: flex !important; page-break-after: always; min-height: 100vh; }
+    .progress-bar, .nav-hint, .slide-number { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Nav hint -->
+<div class="nav-hint">Arrow keys or click to navigate</div>
+
+<!-- Slide number -->
+<div class="slide-number" id="slideNumber"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 1 — Title
+     ═══════════════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1">
+  <div class="slide-label">Stakeholder Status Report</div>
+  <h1>General-Engineering</h1>
+  <div class="slide-subtitle">Atlas &middot; Depot &middot; Nexus</div>
+  <div class="slide-meta">15 February 2026 &nbsp;|&nbsp; 3 active projects</div>
+  <div class="key-message">
+    One of three projects on track with healthy delivery. Two teams outside the target band due to planning calibration challenges — both have improvement actions underway. No critical bugs or security issues across the business unit.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 2 — Project Health (Variant A cards)
+     ═══════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <h2>Project Health</h2>
+  <div class="h2-subtitle">Delivery rate — story points completed vs planned (last 4 sprints)</div>
+
+  <div class="card-grid">
+
+    <!-- Atlas ⚠️ Watch -->
+    <div class="va-card">
+      <svg class="spark-bg" viewBox="0 0 200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad-atlas" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#fdd835" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#fdd835" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 88%,62%,31%,67% → y: 49.6, 70.4, 95.2, 66.4 -->
+        <path d="M0,49.6 L66,70.4 L133,95.2 L200,66.4 L200,120 L0,120 Z" fill="url(#grad-atlas)"/>
+        <polyline points="0,49.6 66,70.4 133,95.2 200,66.4" fill="none" stroke="#fdd835" stroke-width="1.5" stroke-opacity="0.3"/>
+      </svg>
+      <div class="card-content">
+        <div class="project-header">
+          <span class="project-name" style="color:var(--c-atlas);">Atlas</span>
+          <span class="badge badge-watch">&#x26A0;&#xFE0F; Watch</span>
+        </div>
+        <div class="metrics">
+          <div class="metric-row"><span class="metric-label">Delivery</span><span class="metric-value" style="color:var(--yellow);">67% — recovering</span></div>
+          <div class="metric-row"><span class="metric-label">Quality</span><span class="metric-value">&#x2705; 0 critical bugs</span></div>
+          <div class="metric-row"><span class="metric-label">Security</span><span class="metric-value">&#x2705; 0 overdue</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Depot ⚠️ Watch -->
+    <div class="va-card">
+      <svg class="spark-bg" viewBox="0 0 200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad-depot" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#fdd835" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#fdd835" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 66%,94%,100%,138% → y: 67.2, 44.8, 40, 9.6 -->
+        <path d="M0,67.2 L66,44.8 L133,40 L200,9.6 L200,120 L0,120 Z" fill="url(#grad-depot)"/>
+        <polyline points="0,67.2 66,44.8 133,40 200,9.6" fill="none" stroke="#fdd835" stroke-width="1.5" stroke-opacity="0.3"/>
+      </svg>
+      <div class="card-content">
+        <div class="project-header">
+          <span class="project-name" style="color:var(--c-depot);">Depot</span>
+          <span class="badge badge-watch">&#x26A0;&#xFE0F; Watch</span>
+        </div>
+        <div class="metrics">
+          <div class="metric-row"><span class="metric-label">Delivery</span><span class="metric-value" style="color:var(--yellow);">138% — estimation review</span></div>
+          <div class="metric-row"><span class="metric-label">Quality</span><span class="metric-value">&#x2705; 0 critical bugs</span></div>
+          <div class="metric-row"><span class="metric-label">Security</span><span class="metric-value">&#x2705; 0 overdue</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nexus ✅ Healthy -->
+    <div class="va-card">
+      <svg class="spark-bg" viewBox="0 0 200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad-nexus" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#66bb6a" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#66bb6a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- 63%,38%,78%,75% → y: 69.6, 89.6, 57.6, 60 -->
+        <path d="M0,69.6 L66,89.6 L133,57.6 L200,60 L200,120 L0,120 Z" fill="url(#grad-nexus)"/>
+        <polyline points="0,69.6 66,89.6 133,57.6 200,60" fill="none" stroke="#66bb6a" stroke-width="1.5" stroke-opacity="0.3"/>
+      </svg>
+      <div class="card-content">
+        <div class="project-header">
+          <span class="project-name" style="color:var(--c-nexus);">Nexus</span>
+          <span class="badge badge-healthy">&#x2705; Healthy</span>
+        </div>
+        <div class="metrics">
+          <div class="metric-row"><span class="metric-label">Delivery</span><span class="metric-value" style="color:var(--green);">75% — on track</span></div>
+          <div class="metric-row"><span class="metric-label">Quality</span><span class="metric-value">&#x2705; 0 critical bugs</span></div>
+          <div class="metric-row"><span class="metric-label">Security</span><span class="metric-value">&#x2705; 0 overdue</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 3 — Dependencies & Blockers
+     ═══════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <h2>Dependencies &amp; Blockers</h2>
+  <div class="h2-subtitle">Cross-team impacts and resolution status</div>
+
+  <div class="content-cards">
+
+    <div class="content-card">
+      <div class="card-title" style="color:var(--c-atlas);">&#x26A0;&#xFE0F; Atlas — Below-target delivery rate</div>
+      <div class="card-body-text">
+        Delivery rate at 67%, below the 75% healthy threshold. The dip originated in the holiday period (22 Dec &ndash; 5 Jan) and the team is in active recovery with planning calibration adjustments.
+      </div>
+      <div class="card-status">Status: Recovering &mdash; planning calibration in progress, upward trajectory expected next sprint</div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-title" style="color:var(--c-depot);">&#x26A0;&#xFE0F; Depot — Overcommit pattern</div>
+      <div class="card-body-text">
+        Delivery rate at 138%, consistently exceeding planned capacity. This reflects an estimation gap rather than a quality concern &mdash; the team is delivering well but planning too conservatively.
+      </div>
+      <div class="card-status">Status: Estimation review underway &mdash; team adjusting sprint planning baselines</div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-title">&#x2705; No cross-team blocking dependencies</div>
+      <div class="card-body-text">
+        All three projects are operating independently with no shared blockers or external dependency constraints at this time.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 4 — Shared Risks
+     ═══════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+  <h2>Shared Risks</h2>
+  <div class="h2-subtitle">Themes affecting multiple teams across the business unit</div>
+
+  <div class="content-cards">
+
+    <div class="content-card">
+      <div class="card-title">&#x26A0;&#xFE0F; Planning calibration &mdash; BU-wide theme</div>
+      <div class="card-body-text">
+        Two of three teams are outside the healthy delivery band (67% under, 138% over). This points to a shared planning maturity challenge rather than isolated team issues. Both teams have active improvement actions.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-title">&#x26A0;&#xFE0F; Forecasting accuracy &mdash; Depot overcommit</div>
+      <div class="card-body-text">
+        Depot's consistent over-delivery creates forecasting risk for capacity planning and cross-team resource allocation. The estimation review will bring sprint targets closer to actual throughput.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <div class="card-title">&#x2705; Holiday-period volatility &mdash; resolved</div>
+      <div class="card-body-text">
+        Atlas's sharp dip in late December was a seasonal effect (holiday sprint, 22 Dec &ndash; 5 Jan). The team has resumed normal cadence and delivery is trending upward. No further action required.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 5 — Actions & Asks
+     ═══════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <h2>&#x1F3AF; Actions &amp; Asks</h2>
+  <div class="h2-subtitle">Business-unit level actions for the next period</div>
+
+  <div class="action-list">
+
+    <div class="action-item">
+      <span class="action-num">1.</span>
+      <div>
+        <div class="action-text">Establish a BU-wide planning calibration review to address the shared estimation gap across Atlas and Depot.</div>
+        <div class="action-owner">Owner: Delivery leads &middot; Target: next PI planning</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-num">2.</span>
+      <div>
+        <div class="action-text">Complete Depot estimation review and adjust sprint baselines to reflect actual team throughput.</div>
+        <div class="action-owner">Owner: Depot delivery lead &middot; Target: next 2 sprints</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-num">3.</span>
+      <div>
+        <div class="action-text">Monitor Atlas recovery trajectory &mdash; confirm delivery rate returns to the 75%+ healthy band within 2 sprints.</div>
+        <div class="action-owner">Owner: Atlas delivery lead &middot; Target: Sprint 64</div>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <span class="action-num">4.</span>
+      <div>
+        <div class="action-text">Share Nexus planning practices as a reference model for the BU &mdash; consistent delivery within healthy range.</div>
+        <div class="action-owner">Owner: BU engineering lead &middot; Target: next retrospective</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing-message">
+    All three projects maintain clean quality and security profiles with zero critical bugs and zero overdue security findings. The primary focus for this period is planning calibration &mdash; a solvable challenge with actions already underway. We expect both Atlas and Depot to move into the healthy delivery band within the coming sprints.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     Navigation script
+     ═══════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const slideNumber = document.getElementById('slideNumber');
+  let current = 0;
+
+  function show(index) {
+    if (index < 0 || index >= slides.length) return;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    updateUI();
+  }
+
+  function updateUI() {
+    const pct = ((current + 1) / slides.length) * 100;
+    progressBar.style.width = pct + '%';
+    slideNumber.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      show(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      show(current - 1);
+    }
+  });
+
+  slides.forEach(function(slide, i) {
+    slide.addEventListener('click', function(e) {
+      // Click right half → next, left half → previous
+      var rect = slide.getBoundingClientRect();
+      if (e.clientX > rect.left + rect.width / 2) {
+        show(current + 1);
+      } else {
+        show(current - 1);
+      }
+    });
+  });
+
+  updateUI();
+})();
+</script>
+
+</body>
+</html>

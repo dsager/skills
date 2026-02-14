@@ -1,0 +1,71 @@
+Title,Bugs resolved,Business Unit,Code security issues,Code smells (sum),Critical Bugs,Cycle time (days),Dependencies findings,Deployment lead time (working days),Deployments Prod,NPS,Open Bugs,Project,"Security findings, platform  (Overdue)",Sprint %,Sprint Complete,Sprint Start/End Date,Sprint Target,Team Mood,Test Coverage
+Sprint 49,2,General-Engineering,,218,0,"6,8",,19,1,"8,1",5,Atlas,0,78 %,39,07/07/2025,50,"6,73","83,75 %"
+Sprint 50,4,General-Engineering,,234,0,"6,5",,16,2,"8,1",3,Atlas,0,"71,0144927536 %",49,21/07/2025,69,"6,64","84,35 %"
+Sprint 51,6,General-Engineering,,202,0,"6,1",,16,2,"8,1",2,Atlas,0,"80,3278688525 %",49,04/08/2025,61,"6,78","84,5 %"
+Spring 52,7,General-Engineering,,201,0,"6,7",,16,2,"8,94",3,Atlas,0,"95,7446808511 %",45,18/08/2025,47,"6,78","83,6 %"
+Sprint 53,5,General-Engineering,,165,0,"6,1",,16,2,"8,94",1,Atlas,0,"88,3720930233 %",38,01/09/2025,43,"6,6","84,85 %"
+Sprint 54,2,General-Engineering,,124,0,"5,9",,16,2,"8,94",6,Atlas,0,"69,7674418605 %",30,15/09/2025,43,"6,6","85,95 %"
+Sprint 55,3,General-Engineering,,121,0,6,216,20,1,"8,94",8,Atlas,0,"86,5384615385 %",45,29/09/2025,52,"6,6","85,75 %"
+Sprint 56,4,General-Engineering,,120,0,6,216,16,2,"8,67",1,Atlas,0,"76,6666666667 %",46,13/10/2025,60,"6,6","85,85 %"
+Sprint 57,6,General-Engineering,,125,0,"6,5",216,9,3,"8,67",6,Atlas,0,"72,4137931034 %",42,27/10/2025,58,"6,6","85,55 %"
+Sprint 58,1,General-Engineering,,291,0,"6,2",201,14,1,"8,67",3,Atlas,0,"90,9090909091 %",60,10/11/2025,66,"8,72","86,25 %"
+Sprint 59,3,General-Engineering,,166,0,4,53,5,2,"8,67",3,Atlas,0,"88,2352941176 %",30,25/11/2025,34,"8,72",89 %
+Sprint 60,0,General-Engineering,,166,0,"5,5",53,"8,5",1,"8,67",0,Atlas,0,"61,5384615385 %",32,09/12/2025,52,"8,72","89,7 %"
+Sprint 61,2,General-Engineering,0,195,0,"6,5",5,,0,"8,67",3,Atlas,0,"31,4285714286 %",11,22/12/2025,35,"8,72","85,88 %"
+Sprint 62,4,General-Engineering,0,104,0,5,5,,0,"8,67",4,Atlas,0,"67,3469387755 %",33,12/01/2026,49,"8,77","84,92 %"
+(P) P*: Billing module ready!,0,General-Engineering,,5,0,10,,18,1,,1,Depot,,"82,0512820513 %",32,30/06/2025,39,8.625,"83,4 %"
+(Q) Q*: Data export requirement is ready!,4,General-Engineering,,7,0,5,,,0,,4,Depot,,"125,4545454545 %",69,14/07/2025,55,"8,3","79,5 %"
+(R) R*: Inventory report is ready!,5,General-Engineering,,7,0,6,,10,1,,0,Depot,,"103,9215686275 %",53,28/07/2025,51,"8,4","79,5 %"
+(S) S*: Config report is ready!,2,General-Engineering,,7,0,6,,,0,,2,Depot,,66 %,33,11/08/2025,50,"8,4","79,5 %"
+(T) T*: Catalog object is available in staging,3,General-Engineering,,7,0,7,,12,1,,4,Depot,,"114,2857142857 %",56,25/08/2025,49,"8,2","79,5 %"
+(U) U*: Analytics reports are ready in staging!,4,General-Engineering,,7,0,5,,,0,,5,Depot,,"117,6470588235 %",40,22/09/2025,34,"8,3","79,5 %"
+(V) V*: The production manifest is ready in staging,1,General-Engineering,,7,0,8,,20,1,,0,Depot,,"23,5294117647 %",8,06/10/2025,34,"7,8","79,5 %"
+(W) W*: The Prio 4 dashboard reports are in staging!,4,General-Engineering,,7,0,6,,10,1,,4,Depot,,"95,5223880597 %",64,20/10/2025,67,"8,7","79,5 %"
+(X) X*: Tracking report is ready in staging/UAT!,6,General-Engineering,,7,0,4,,5,2,,6,Depot,,"95,652173913 %",44,03/11/2025 → 18/11/2025,46,"7,87",77 %
+(Y) Y*: The regional integration report is ready in staging!,3,General-Engineering,,7,0,5,,5,2,,4,Depot,,"65,8227848101 %",52,17/11/2025 → 01/12/2025,79,"8,16",77 %
+(Z) Z*: Regional office report,2,General-Engineering,,7,0,"6,8",,15,1,,4,Depot,,"94,2857142857 %",33,01/12/2025 → 19/12/2025,35,"8,2",768 %
+End missing things/ Stabilization phases/ Preparation PI Planning,3,General-Engineering,,7,0,,,,0,,5,Depot,,100 %,18,29/12/2025 → 08/01/2026,18,"8,16",77 %
+"(A) A*: All new interfaces ingested: feeds, events, sync, export",4,General-Engineering,,8,0,"6,9",,23,1,,4,Depot,,"138,4615384615 %",54,08/01/2026 → 26/01/2026,39,"8,8","74,5 %"
+(B) B*: Finalise validation reports (Prio 1),,General-Engineering,,,,,,,,,,Depot,,0 %,,26/01/2026,,,
+Sprint 91,4,General-Engineering,,303,0,56,,11,0,,2,Nexus,0,100 %,59,17/07/2025,59,"9,6",83 %
+Sprint 92,0,General-Engineering,,303,0,56,,11,1,,2,Nexus,0,"110,3448275862 %",96,30/07/2025,87,"9,6",83 %
+Sprint 93,0,General-Engineering,,210,0,56,,11,0,,2,Nexus,0,"31,4285714286 %",11,14/08/2025,35,"9,6",83 %
+Sprint 94,0,General-Engineering,,210,0,56,,11,0,,2,Nexus,0,"19,0476190476 %",8,26/08/2025,42,"9,6",85 %
+Sprint 90,4,General-Engineering,,303,0,56,,11,0,,2,Nexus,0,"47,3684210526 %",18,01/09/2025,38,"9,6",83 %
+Sprint 95,0,General-Engineering,,154,0,56,,11,0,,3,Nexus,0,"37,9310344828 %",33,09/09/2025,87,"9,6",85 %
+Sprint 96,0,General-Engineering,,153,0,56,,5,1,,3,Nexus,0,"60,4651162791 %",52,23/09/2025,86,"9,6",85 %
+Sprint 97,0,General-Engineering,,153,0,56,,7,0,,3,Nexus,0,"82,2580645161 %",51,08/10/2025,62,"9,6",85 %
+Sprint 98,0,General-Engineering,3,128,0,56,20,5,0,,3,Nexus,0,"92,8571428571 %",39,22/10/2025,42,"9,6",85 %
+Sprint 99,0,General-Engineering,,118,0,56,,2,0,,3,Nexus,0,"34,7826086957 %",8,05/11/2025,23,"9,6",85 %
+Sprint 100,0,General-Engineering,,118,0,56,,4,0,,3,Nexus,0,"63,3333333333 %",57,19/11/2025 → 03/12/2025,90,"9,6",85 %
+Sprint 101,0,General-Engineering,,357,0,56,,3,0,,5,Nexus,0,"38,0952380952 %",16,03/12/2025 → 17/12/2025,42,"9,6",85 %
+Sprint 102,0,General-Engineering,,467,0,56,,7,0,,5,Nexus,0,"78,0952380952 %",82,17/12/2025 → 14/01/2026,105,"9,6",85 %
+Sprint 103,0,General-Engineering,,644,0,56,,6,0,,0,Nexus,0,75 %,57,14/01/2026 → 28/01/2026,76,10,85 %
+Sprint 116,2,Data & Logistics,,811,0,"3,2",,7,1,,5,Pulse,3913,80 %,4,15/07/2025,5,"6,6","90,6 %"
+Sprint 117,7,Data & Logistics,,803,1,-1,,-1,1,,4,Pulse,4228,75 %,3,29/07/2025,4,"7,2","90,6 %"
+Sprint 118,1,Data & Logistics,,773,1,-1,,-1,4,,4,Pulse,4558,100 %,2,12/08/2025,2,"7,1","90,6 %"
+Sprint 119,5,Data & Logistics,,773,0,-1,,-1,7,,14,Pulse,5221,0 %,0,26/08/2025,3,"7,1","90,6 %"
+Sprint 120,9,Data & Logistics,,773,1,-1,,-1,8,,41,Pulse,5221,112 %,28,09/09/2025,25,"7,15","90,6 %"
+Sprint 121,21,Data & Logistics,,773,1,-1,,-1,6,,18,Pulse,5221,"25,8064516129 %",8,23/09/2025,31,"7,25","90,6 %"
+Sprint 122,8,Data & Logistics,,787,1,-1,,-1,3,,16,Pulse,5475,"81,25 %",13,07/10/2025,16,"7,25","90,4 %"
+Sprint 123,10,Data & Logistics,,784,3,-1,,-1,1,,36,Pulse,5475,"81,25 %",13,21/10/2025,16,"7,3","90,4 %"
+Sprint 124,9,Data & Logistics,,3345,3,15,,15,1,,17,Pulse,3546,"76,9230769231 %",10,04/11/2025,13,7,"90,2 %"
+Sprint 125,103,Data & Logistics,,4800,3,15,,15,1,,15,Pulse,717,"73,6842105263 %",28,02/12/2025,38,"7,5","90,3 %"
+Sprint 126,12,Data & Logistics,,4800,1,15,,15,1,,10,Pulse,717,"66,6666666667 %",20,15/12/2025,30,"7,5","90,3 %"
+Sprint 127 (Christmas),8,Data & Logistics,,3355,0,15,,15,0,,10,Pulse,1375,"17,8571428571 %",5,16/12/2025 → 13/01/2026,28,6,"93,2 %"
+Sprint 128 ,7,Data & Logistics,15,3410,0,9,944,30,1,,10,Pulse,1544,"230,612244898 %",113,13/01/2026 → 27/01/2026,49,"7,23","90,3 %"
+Sprint 129,,Data & Logistics,,,,,,,,,,Pulse,,0 %,,27/01/2026 → 10/02/2026,,,
+,0,Quality & Sales,,14,0,4,,6,3,,2,Quest,6,"102,5641025641 %",40,14/07/2025 → 25/07/2025,39,"7,3","86,4 %"
+,2,Quality & Sales,,18,0,4,,6,1,,0,Quest,6,"87,6543209877 %",71,28/07/2025 → 08/08/2025,81,"7,3","86,3 %"
+,0,Quality & Sales,,15,0,5,,7,1,,0,Quest,6,"90,1408450704 %",64,11/08/2025 → 22/08/2025,71,"8,6","86,3 %"
+,0,Quality & Sales,,21,0,3,,6,1,,0,Quest,6,"86,9047619048 %",73,25/08/2025 → 05/09/2025,84,"8,6","86,4 %"
+,0,Quality & Sales,,22,0,4,,6,2,,1,Quest,6,"77,3480662983 %",70,08/09/2025 → 19/09/2025,"90,5","7,3","86,1 %"
+,1,Quality & Sales,,9,0,3,,5,1,,1,Quest,4,"77,1812080537 %",115,22/09/2025 → 03/10/2025,149,"7,3","87,1 %"
+,1,Quality & Sales,,8,0,4,,5,3,,0,Quest,4,"68,275862069 %",99,06/10/2025 → 17/10/2025,145,7,87 %
+,2,Quality & Sales,,9,0,5,,5,3,,1,Quest,10,"82,7450980392 %","105,5",20/10/2025 → 04/11/2025,"127,5","7,6","87,2 %"
+,1,Quality & Sales,2,894,0,4,28,5,3,,1,Quest,10,"90,3614457831 %","112,5",04/11/2025 → 14/11/2025,"124,5","7,6","87,1 %"
+,1,Quality & Sales,2,760,0,5,31,4,4,,1,Quest,10,"98,7577639752 %",159,17/11/2025 → 01/12/2025,161,"7,6","87,1 %"
+,1,Quality & Sales,21,1420,0,5,62,7,1,,0,Quest,23,"58,5585585586 %",65,02/12/2025 → 15/12/2025,111,"7,6","86,4 %"
+,0,Quality & Sales,21,1426,0,7,63,6,2,,1,Quest,23,"90,1041666667 %","86,5",16/12/2025 → 30/12/2025,96,"7,6","86,4 %"
+,4,Quality & Sales,21,1121,0,7,80,6,2,,0,Quest,23,"69,3069306931 %",70,31/12/2025 → 13/01/2026,101,"7,5","87,2 %"
+,2,Quality & Sales,21,1130,0,6,77,6,2,,2,Quest,23,"94,1176470588 %",104,14/01/2026 → 27/01/2026,"110,5","7,5",87 %

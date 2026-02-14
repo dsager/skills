@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Status Report — Nexus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #1a1a2e;
+    --bg-card:   #16213e;
+    --bg-slide:  #1a1a2e;
+    --text:      #e8e8f0;
+    --text-dim:  #9a9ab0;
+    --accent:    #4fc3f7;
+    --green:     #66bb6a;
+    --yellow:    #fdd835;
+    --red:       #ef5350;
+    --border:    #2a2a4a;
+    --progress:  #4fc3f7;
+    --font:      'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Progress Bar ─────────────────────────────────────── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--progress);
+    transition: width 0.35s ease;
+    z-index: 100;
+  }
+
+  /* ── Slide Container ──────────────────────────────────── */
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 60px 80px 50px;
+    position: relative;
+  }
+  .slide.active { display: flex; }
+
+  .slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ── Slide Number ─────────────────────────────────────── */
+  .slide-number {
+    position: fixed;
+    bottom: 18px;
+    right: 28px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    z-index: 100;
+  }
+
+  /* ── Typography ───────────────────────────────────────── */
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .meta {
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .key-message {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 720px;
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+  }
+
+  /* ── Health Cards ─────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+
+  .card .card-label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .card .card-status {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .card .card-detail {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .card.healthy { border-color: var(--green); }
+
+  .slide-note {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ── Chart Area ───────────────────────────────────────── */
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0 20px;
+  }
+
+  .chart-container svg { max-width: 100%; }
+
+  .trend-note {
+    font-size: 16px;
+    margin-top: 16px;
+    color: var(--text);
+  }
+
+  .trend-note .emoji { margin-right: 6px; }
+
+  /* ── Risks Layout ─────────────────────────────────────── */
+  .risk-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 8px;
+  }
+
+  .risk-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .risk-section h3.active-label  { color: var(--yellow); }
+  .risk-section h3.resolved-label { color: var(--green); }
+
+  .risk-item {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-left: 8px;
+  }
+
+  .risk-item .emoji { margin-right: 6px; }
+
+  .risk-empty {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* ── Summary / Next Steps ─────────────────────────────── */
+  .summary-list {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .summary-list li {
+    font-size: 18px;
+    line-height: 1.7;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-list li:last-child { border-bottom: none; }
+  .summary-list li .emoji { margin-right: 8px; }
+
+  /* ── Navigation Hint ──────────────────────────────────── */
+  .nav-hint {
+    position: fixed;
+    bottom: 18px;
+    left: 28px;
+    font-size: 12px;
+    color: var(--text-dim);
+    opacity: 0.5;
+    z-index: 100;
+  }
+
+  /* ── Print ────────────────────────────────────────────── */
+  @media print {
+    .slide { display: flex !important; page-break-after: always; min-height: 100vh; }
+    .slide:last-child { page-break-after: avoid; }
+    #progress-bar, .slide-number, .nav-hint { display: none !important; }
+    body { background: #fff; color: #111; }
+    .card { border-color: #ccc; background: #f5f5f5; }
+    .label, .meta, .card-label, .card-detail, .slide-note, .risk-empty { color: #555; }
+    h1, h2, .card-status, .key-message, .risk-item, .summary-list li, .trend-note { color: #111; }
+    :root { --border: #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar" style="width: 20%;"></div>
+
+<!-- Slide Number -->
+<div class="slide-number"><span id="current-slide">1</span> / 5</div>
+
+<!-- Navigation Hint -->
+<div class="nav-hint">Arrow keys or click to navigate</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 1 — Title
+     ════════════════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1">
+  <div class="slide-content">
+    <div class="label">Executive Status Report</div>
+    <h1>Nexus</h1>
+    <div class="meta">15 February 2026 &nbsp;|&nbsp; General-Engineering &nbsp;|&nbsp; Post&ndash;Sprint 103, delivery stabilised</div>
+    <div class="key-message">
+      Nexus is healthy. Delivery has recovered into the target band (75&percnt;); no quality or security issues.
+      Maintain current planning discipline to keep delivery stable.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 2 — Project Health
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <div class="slide-content">
+    <h2>Project Health</h2>
+    <div class="card-grid">
+
+      <div class="card healthy">
+        <div class="card-label">Delivery</div>
+        <div class="card-status">&#x2705; 75%</div>
+        <div class="card-detail">In target band; recovery from earlier volatility</div>
+      </div>
+
+      <div class="card healthy">
+        <div class="card-label">Quality</div>
+        <div class="card-status">&#x2705;</div>
+        <div class="card-detail">0 critical, 0 open bugs</div>
+      </div>
+
+      <div class="card healthy">
+        <div class="card-label">Security</div>
+        <div class="card-status">&#x2705;</div>
+        <div class="card-detail">0 overdue findings</div>
+      </div>
+
+      <div class="card healthy">
+        <div class="card-label">Coverage</div>
+        <div class="card-status">&#x2705; 85%</div>
+        <div class="card-detail">At threshold</div>
+      </div>
+
+      <div class="card healthy">
+        <div class="card-label">Team</div>
+        <div class="card-status">&#x2705; Mood 10</div>
+        <div class="card-detail">Strong engagement</div>
+      </div>
+
+    </div>
+    <div class="slide-note">No interventions required. Continue current ways of working.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 3 — Delivery Trajectory
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <div class="slide-content">
+    <h2>Delivery Trajectory</h2>
+    <div class="meta" style="margin-bottom:16px;">Delivery rate &mdash; story points completed vs planned (last 4 sprints)</div>
+
+    <div class="chart-container">
+      <!--
+        SVG sparkline chart
+        X-axis: 4 sprints (100, 101, 102, 103)
+        Y-axis: 0% – 120%
+        Chart area: 600 x 300, padded inside a 740 x 380 viewBox
+      -->
+      <svg viewBox="0 0 740 400" width="700" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+        <!-- Background -->
+        <rect x="0" y="0" width="740" height="400" rx="12" fill="#16213e"/>
+
+        <!-- Chart area offset: left=90, top=40, width=580, height=300 -->
+        <!-- Y-axis: 0% at y=340, 120% at y=40  =>  y = 340 - (pct/120)*300 -->
+
+        <!-- Gridlines (horizontal) -->
+        <line x1="90" y1="340" x2="670" y2="340" stroke="#2a2a4a" stroke-width="1"/>  <!-- 0% -->
+        <line x1="90" y1="277.5" x2="670" y2="277.5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4,4"/>  <!-- 25% -->
+        <line x1="90" y1="215" x2="670" y2="215" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4,4"/>  <!-- 50% -->
+        <line x1="90" y1="152.5" x2="670" y2="152.5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4,4"/>  <!-- 75% -->
+        <line x1="90" y1="90" x2="670" y2="90" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4,4"/>  <!-- 100% -->
+
+        <!-- Y-axis labels -->
+        <text x="78" y="344" text-anchor="end" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">0%</text>
+        <text x="78" y="219" text-anchor="end" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">50%</text>
+        <text x="78" y="94" text-anchor="end" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">100%</text>
+
+        <!-- Threshold zone: 75% – 115% (green band) -->
+        <!-- 75%: y = 340 - (75/120)*300 = 340 - 187.5 = 152.5 -->
+        <!-- 115%: y = 340 - (115/120)*300 = 340 - 287.5 = 52.5 -->
+        <rect x="90" y="52.5" width="580" height="100" fill="#66bb6a" opacity="0.07" rx="2"/>
+
+        <!-- Threshold lines -->
+        <line x1="90" y1="152.5" x2="670" y2="152.5" stroke="#66bb6a" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <text x="674" y="156" fill="#66bb6a" font-size="11" font-family="Inter, sans-serif">75%</text>
+
+        <line x1="90" y1="52.5" x2="670" y2="52.5" stroke="#66bb6a" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <text x="674" y="56" fill="#66bb6a" font-size="11" font-family="Inter, sans-serif">115%</text>
+
+        <!-- X positions: evenly spaced across 580px at 90, 283, 477, 670 -->
+        <!-- Sprint 100: 63%  y = 340 - (63/120)*300 = 340 - 157.5 = 182.5 -->
+        <!-- Sprint 101: 38%  y = 340 - (38/120)*300 = 340 - 95    = 245   -->
+        <!-- Sprint 102: 78%  y = 340 - (78/120)*300 = 340 - 195   = 145   -->
+        <!-- Sprint 103: 75%  y = 340 - (75/120)*300 = 340 - 187.5 = 152.5 -->
+
+        <!-- Connecting line -->
+        <polyline
+          points="90,182.5 283,245 477,145 670,152.5"
+          fill="none"
+          stroke="#4fc3f7"
+          stroke-width="2.5"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+        />
+
+        <!-- Data points -->
+        <!-- Sprint 100: 63% — below target (yellow) -->
+        <circle cx="90"  cy="182.5" r="7" fill="#fdd835" stroke="#16213e" stroke-width="2"/>
+        <text x="90" y="170" text-anchor="middle" fill="#fdd835" font-size="13" font-weight="600" font-family="Inter, sans-serif">63%</text>
+
+        <!-- Sprint 101: 38% — low (red) -->
+        <circle cx="283" cy="245" r="7" fill="#ef5350" stroke="#16213e" stroke-width="2"/>
+        <text x="283" y="263" text-anchor="middle" fill="#ef5350" font-size="13" font-weight="600" font-family="Inter, sans-serif">38%</text>
+
+        <!-- Sprint 102: 78% — recovered (green) -->
+        <circle cx="477" cy="145" r="7" fill="#66bb6a" stroke="#16213e" stroke-width="2"/>
+        <text x="477" y="133" text-anchor="middle" fill="#66bb6a" font-size="13" font-weight="600" font-family="Inter, sans-serif">78%</text>
+
+        <!-- Sprint 103: 75% — stable (green) -->
+        <circle cx="670" cy="152.5" r="7" fill="#66bb6a" stroke="#16213e" stroke-width="2"/>
+        <text x="670" y="140" text-anchor="middle" fill="#66bb6a" font-size="13" font-weight="600" font-family="Inter, sans-serif">75%</text>
+
+        <!-- X-axis labels -->
+        <text x="90"  y="365" text-anchor="middle" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">S100</text>
+        <text x="90"  y="380" text-anchor="middle" fill="#9a9ab0" font-size="10" font-family="Inter, sans-serif">03/12/2025</text>
+
+        <text x="283" y="365" text-anchor="middle" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">S101</text>
+        <text x="283" y="380" text-anchor="middle" fill="#9a9ab0" font-size="10" font-family="Inter, sans-serif">17/12/2025</text>
+
+        <text x="477" y="365" text-anchor="middle" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">S102</text>
+        <text x="477" y="380" text-anchor="middle" fill="#9a9ab0" font-size="10" font-family="Inter, sans-serif">14/01/2026</text>
+
+        <text x="670" y="365" text-anchor="middle" fill="#9a9ab0" font-size="12" font-family="Inter, sans-serif">S103</text>
+        <text x="670" y="380" text-anchor="middle" fill="#9a9ab0" font-size="10" font-family="Inter, sans-serif">28/01/2026</text>
+      </svg>
+    </div>
+
+    <div class="trend-note"><span class="emoji">&#x1F4C8;</span> Improving. Last two sprints in healthy range.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 4 — Risks & Mitigations
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+  <div class="slide-content">
+    <h2>Risks &amp; Mitigations</h2>
+    <div class="risk-columns">
+
+      <div class="risk-section">
+        <h3 class="active-label">&#x1F3AF; Active</h3>
+        <div class="risk-empty">No active risks.</div>
+      </div>
+
+      <div class="risk-section">
+        <h3 class="resolved-label">&#x2705; Resolved</h3>
+        <div class="risk-item">
+          <span class="emoji">&#x1F44D;</span>
+          <strong>Delivery volatility</strong> &mdash; Addressed. If it reappears, the team will capture context in sprint titles and maintain current commitment discipline.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SLIDE 5 — Summary / Next Steps
+     ════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <div class="slide-content">
+    <h2>&#x1F3AF; Summary &amp; Next Steps</h2>
+    <ul class="summary-list">
+      <li><span class="emoji">&#x2705;</span> <strong>Nexus</strong>: Healthy. Delivery 75%, zero bugs, mood 10.</li>
+      <li><span class="emoji">&#x27A1;&#xFE0F;</span> <strong>Next</strong>: Maintain planning discipline; no changes required.</li>
+    </ul>
+    <div class="key-message">
+      Nexus is in a strong position. All health metrics are green, delivery is stable in the target band, and team engagement is high. No action items &mdash; continue current ways of working.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     JavaScript — Navigation
+     ════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let current  = 0;
+
+  function show(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    document.getElementById('current-slide').textContent = current + 1;
+    document.getElementById('progress-bar').style.width =
+      ((current + 1) / total * 100) + '%';
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      show(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      show(current - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      show(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      show(total - 1);
+    }
+  });
+
+  // Click navigation: left third = back, right two-thirds = forward
+  document.addEventListener('click', function (e) {
+    // Ignore clicks on interactive elements
+    if (e.target.closest('a, button, input, select, textarea')) return;
+    var x = e.clientX / window.innerWidth;
+    if (x < 0.33) {
+      show(current - 1);
+    } else {
+      show(current + 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
