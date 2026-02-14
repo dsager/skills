@@ -26,14 +26,14 @@ Generates actionable executive summaries of software development project health 
 
 ## Suggested workflow
 
-**Use one conversation per sprint cycle.** This keeps context (CSV data, review feedback, Slack responses) flowing naturally through all steps.
+**Use one conversation per sprint cycle.** This keeps context (CSV data, review feedback, follow-up responses) flowing naturally through all steps.
 
 ### Per-sprint conversation flow
 
 1. **Upload CSV and log** — attach the sprint data export and the sprint health log (if one exists from a previous cycle). The log carries forward standing context, events, and review history.
-2. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠), Slack draft messages. If a log file was provided, auto-apply its standing context and recent review history as context annotations. Source of truth. Generate this first.
-3. **Send Slack drafts** — copy the draft messages to the relevant team leads, product owners, and agile coaches.
-4. **Collect responses** — as replies come in, paste them into the conversation. The agent incorporates acknowledgements, corrections, and context into the reviewed report. This is the review step — repeat as needed until satisfied.
+2. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠), follow-up action items. If a log file was provided, auto-apply its standing context and recent review history as context annotations. Source of truth. Generate this first.
+3. **Follow up** — work through the follow-up items: clarify data with team leads, discuss priorities with POs, address process topics with agile coaches.
+4. **Collect responses** — as answers come in, paste them into the conversation. The agent incorporates acknowledgements, corrections, and context into the reviewed report. This is the review step — repeat as needed until satisfied.
 5. **Update log** — agent auto-generates an updated sprint health log incorporating review outcomes. User saves it for next cycle.
 6. **Executive report** (`audience: executive`, `format: html` or `markdown`) — Solutions-first, no 🟠 unverified alerts. Every problem has a solution. Generate only after review step (or explicit user request).
 7. **Stakeholder report** (`audience: stakeholder`, optional) — Cross-team focus, dependencies, PI-level. Omit team internals.
@@ -42,7 +42,7 @@ Generates actionable executive summaries of software development project health 
 
 - Always start with step 2 (operational). Do not skip to executive or stakeholder without a reviewed operational report unless the user explicitly asks.
 - For a quick scan only, step 2 with `projects: ALL` is enough.
-- Slack responses pasted into the conversation count as review input — no separate review format needed.
+- Responses from follow-ups pasted into the conversation count as review input — no separate review format needed.
 - If a 🟠 verify item is confirmed or denied via Slack, update the report accordingly (confirm → 🔵, deny → exclude or correct).
 - If no log file is provided, proceed normally — the log is optional but recommended for continuity.
 

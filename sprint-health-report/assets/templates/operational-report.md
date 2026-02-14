@@ -31,36 +31,27 @@ Use this structure for `audience: operational` reports.
 1. [Specific action → tied to metric and data → owner hint]
 2. [...]
 
-## 💬 Slack Drafts
+## 💬 Follow-Ups
 
-Draft messages for relevant roles based on the report findings. Only include a message for a role when the report contains topics that need their input. Skip roles with nothing actionable.
+Action items for clarification, context, or resolution — directed at specific roles. Only include items where the report surfaces something that needs input. Skip roles with nothing actionable.
 
 **Rules:**
-- One message per role per project (or per cluster/portfolio for cross-cutting topics)
-- Casual, direct tone — like a real Slack DM between colleagues
-- Reference specific data points from the report (metric, value, sprint)
-- State clearly what you need: clarification, context, confirmation, or action
-- Keep each message short — 2-4 sentences max, no walls of text
-- Group multiple topics for the same role into one message with bullet points
+- Each item: what to do, who to talk to, why (reference specific data)
+- Route to the right role:
+  - **Team Lead** → delivery, technical debt, capacity, sprint planning
+  - **Product Owner** → scope/targets, priorities, backlog, stakeholder risks
+  - **Agile Coach** → mood, process concerns, retrospective suggestions
 - Include 🟠 verify items directed at whoever can confirm the data
-- Never include health scores or internal jargon — use plain language
+- Keep items concise — one line each
 
-**Role routing:**
-- **Team Lead** → delivery issues (Sprint %, velocity swings), technical debt (code smells, coverage drops), team capacity, sprint planning concerns
-- **Product Owner** → scope/target questions, priority trade-offs, backlog concerns, stakeholder-facing risks
-- **Agile Coach** → mood drops, process concerns (mood = 0 tracking gaps), retrospective suggestions, cross-team patterns
-
-### [Role]: [Person/placeholder]
-> Hey [name], [casual opener about the topic].
-> [Specific ask with data reference].
-> [Optional: what you'll do with their answer, or next step].
-
-*(Repeat per role as needed. Omit roles with no actionable topics.)*
+**Format:**
+1. [Action — what to discuss/verify] → [Role] ([data reference])
+2. [...]
 
 ## 📋 Updated Sprint Health Log
 *(Generated after the review step is complete — not in the initial report.)*
 
-After the user has reviewed the operational report, sent Slack drafts, and collected responses (Steps 3–4), auto-generate an updated sprint health log as a markdown code block. Follow the format and rules in the Sprint Health Log section of SKILL.md. The user saves this file for the next sprint cycle.
+After the user has completed follow-ups and collected responses (Steps 3–4), auto-generate an updated sprint health log as a markdown code block. Follow the format and rules in the Sprint Health Log section of SKILL.md. The user saves this file for the next sprint cycle.
 
 ## Data Quality
 - [Missing metrics, parsing issues, anomalies]
@@ -85,9 +76,9 @@ After per-project sections, add:
 | 2 | ⚠️ | [action] | [owner] | [project] |
 | ... | | | | |
 
-## 💬 Slack Drafts
-[Per-project messages to relevant roles. For cluster-wide topics (shared dependencies,
- ART-level concerns), group into single messages rather than repeating per project.]
+## 💬 Follow-Ups
+[Per-project action items directed at relevant roles. For cluster/portfolio-wide topics,
+ group into single items rather than repeating per project.]
 
 ## 📋 Updated Sprint Health Log
 [Generated after review step — see single project template for details.]
@@ -123,10 +114,10 @@ After per-project sections, add:
 ## 🎯 Top Actions
 [Max 5, sorted by criticality]
 
-## 💬 Slack Drafts
-[Per-project messages to relevant roles, following the same rules as single-project reports.
+## 💬 Follow-Ups
+[Per-project action items directed at relevant roles, following the same rules as single-project reports.
  Group cross-cutting topics (e.g. portfolio-wide mood gaps, shared dependency blockers)
- into separate messages rather than repeating per project.]
+ into single items rather than repeating per project.]
 
 ## 📋 Updated Sprint Health Log
 [Generated after review step — see single project template for details.]
