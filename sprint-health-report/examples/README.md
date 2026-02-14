@@ -7,6 +7,7 @@ Sample inputs and outputs for the sprint-health-report skill. Use these for refe
 | File | Description |
 |------|-------------|
 | **example-metrics.csv** | Example sprint-level metrics in the skill's CSV schema. Based on real data with **fictional project names** (Pulse, Nexus, Atlas, Depot, Quest). One row per sprint per project; European number format. Use for testing or as a template. |
+| **example-sprint-health-log.md** | Example sprint health log showing standing context, events, and review history. Represents the state after one review cycle. Provide alongside the CSV for context continuity. |
 
 ## Report examples
 

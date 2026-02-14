@@ -57,6 +57,11 @@ Draft messages for relevant roles based on the report findings. Only include a m
 
 *(Repeat per role as needed. Omit roles with no actionable topics.)*
 
+## 📋 Updated Sprint Health Log
+*(Generated after the review step is complete — not in the initial report.)*
+
+After the user has reviewed the operational report, sent Slack drafts, and collected responses (Steps 3–4), auto-generate an updated sprint health log as a markdown code block. Follow the format and rules in the Sprint Health Log section of SKILL.md. The user saves this file for the next sprint cycle.
+
 ## Data Quality
 - [Missing metrics, parsing issues, anomalies]
 - [Fact-check exclusions: "Value X excluded — [reason]"]
@@ -83,6 +88,9 @@ After per-project sections, add:
 ## 💬 Slack Drafts
 [Per-project messages to relevant roles. For cluster-wide topics (shared dependencies,
  ART-level concerns), group into single messages rather than repeating per project.]
+
+## 📋 Updated Sprint Health Log
+[Generated after review step — see single project template for details.]
 ```
 
 ## Portfolio Report (`projects = ALL`)
@@ -119,6 +127,9 @@ After per-project sections, add:
 [Per-project messages to relevant roles, following the same rules as single-project reports.
  Group cross-cutting topics (e.g. portfolio-wide mood gaps, shared dependency blockers)
  into separate messages rather than repeating per project.]
+
+## 📋 Updated Sprint Health Log
+[Generated after review step — see single project template for details.]
 ```
 
 ---
@@ -132,3 +143,4 @@ After per-project sections, add:
 - Project names exactly as they appear in the data
 - Group or ART names as the user or context provides (no registry)
 - End with "Ready for your review" to prompt Step 2
+- After review is complete, auto-generate the updated sprint health log (see SKILL.md)

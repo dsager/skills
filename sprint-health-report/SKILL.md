@@ -20,7 +20,7 @@ Generates actionable executive summaries of software development project health 
 | `assets/templates/operational-report.md` | Template for Operational report. |
 | `assets/templates/executive-report.md` | Template for Executive HTML slide deck. |
 | `assets/templates/stakeholder-report.md` | Template for Stakeholder report. |
-| `examples/` | Sample outputs for reference. |
+| `examples/` | Sample outputs and sprint health log for reference. |
 
 **Start here**: Read this file for the analysis spec. See [README.md](README.md) for detailed workflow and tips.
 
@@ -30,12 +30,13 @@ Generates actionable executive summaries of software development project health 
 
 ### Per-sprint conversation flow
 
-1. **Upload CSV** — attach the sprint data export for this cycle.
-2. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠), Slack draft messages. Source of truth. Generate this first.
+1. **Upload CSV and log** — attach the sprint data export and the sprint health log (if one exists from a previous cycle). The log carries forward standing context, events, and review history.
+2. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠), Slack draft messages. If a log file was provided, auto-apply its standing context and recent review history as context annotations. Source of truth. Generate this first.
 3. **Send Slack drafts** — copy the draft messages to the relevant team leads, product owners, and agile coaches.
 4. **Collect responses** — as replies come in, paste them into the conversation. The agent incorporates acknowledgements, corrections, and context into the reviewed report. This is the review step — repeat as needed until satisfied.
-5. **Executive report** (`audience: executive`, `format: html` or `markdown`) — Solutions-first, no 🟠 unverified alerts. Every problem has a solution. Generate only after review step (or explicit user request).
-6. **Stakeholder report** (`audience: stakeholder`, optional) — Cross-team focus, dependencies, PI-level. Omit team internals.
+5. **Update log** — agent auto-generates an updated sprint health log incorporating review outcomes. User saves it for next cycle.
+6. **Executive report** (`audience: executive`, `format: html` or `markdown`) — Solutions-first, no 🟠 unverified alerts. Every problem has a solution. Generate only after review step (or explicit user request).
+7. **Stakeholder report** (`audience: stakeholder`, optional) — Cross-team focus, dependencies, PI-level. Omit team internals.
 
 ### Rules
 
@@ -43,6 +44,7 @@ Generates actionable executive summaries of software development project health 
 - For a quick scan only, step 2 with `projects: ALL` is enough.
 - Slack responses pasted into the conversation count as review input — no separate review format needed.
 - If a 🟠 verify item is confirmed or denied via Slack, update the report accordingly (confirm → 🔵, deny → exclude or correct).
+- If no log file is provided, proceed normally — the log is optional but recommended for continuity.
 
 ---
 
@@ -230,6 +232,50 @@ Optional block for known issues. Prevents re-flagging resolved problems.
 ```
 
 Annotated issues still show status but narrative shifts from "investigate" to "monitor/follow up."
+
+---
+
+## Sprint Health Log
+
+Optional persistent file that carries context across sprint conversations. Provided alongside the CSV at the start of each cycle.
+
+### Format
+
+```markdown
+# Sprint Health Log
+
+## Standing Context
+<!-- Persistent notes that apply until manually removed -->
+- [Project]: [ongoing situation, agreed threshold override, or standing decision]
+
+## Events
+<!-- Dated events that affect sprint interpretation. Remove when no longer relevant. -->
+- YYYY-MM-DD: [event description] (affects: [project(s) or "all"])
+- YYYY-MM-DD → YYYY-MM-DD: [date range event, e.g. holiday period]
+
+## Review History
+<!-- Updated at end of each review step. Most recent first. -->
+### YYYY-MM-DD (Sprint [numbers])
+- [Project] [metric/topic]: [outcome — what was confirmed, denied, or noted]
+```
+
+### Reading the log (Step 2)
+
+When a log file is provided, apply its contents before generating the operational report:
+
+- **Standing Context** → treat as context annotations (shift narrative from "investigate" to "monitor/follow up")
+- **Events** → apply matching heuristics (e.g. a PI planning event triggers the same handling as holiday sprints)
+- **Review History** → use recent entries to avoid re-flagging resolved items. If a previous review confirmed a data point, start with 🔵 confidence.
+
+### Updating the log (Step 5)
+
+At the end of the review step, auto-generate an updated log file:
+
+- **Standing Context** — carry forward existing entries. Add new ones from this review if the user indicated an ongoing situation. Remove entries the user marked as resolved.
+- **Events** — carry forward future/recent events. Prune events older than 6 months.
+- **Review History** — add a new entry for this sprint cycle with outcomes from the review. Keep the last 3 cycles; prune older entries.
+
+Output the updated log as a markdown code block the user can copy and save.
 
 ---
 
