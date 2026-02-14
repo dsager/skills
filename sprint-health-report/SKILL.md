@@ -22,9 +22,9 @@ Generates actionable executive summaries of software development project health 
 | `_template-fragments.md` | Reusable formatting patterns: badges, tables, cards, headers. |
 | `_data-reference.md` | Quick reference: thresholds, scoring, heuristics, validation rules. |
 | `ARCHITECTURE.md` | File organization and design principles. |
-| `templates/operational-report.md` | Template for Operational report. |
-| `templates/executive-report.md` | Template for Executive HTML slide deck. |
-| `templates/stakeholder-report.md` | Template for Stakeholder report. |
+| `assets/templates/operational-report.md` | Template for Operational report. |
+| `assets/templates/executive-report.md` | Template for Executive HTML slide deck. |
+| `assets/templates/stakeholder-report.md` | Template for Stakeholder report. |
 | `examples/` | Sample outputs for reference. |
 
 **Start here**: Read this file for the analysis spec. See [QUICKREF.md](QUICKREF.md) for fast lookup, [README.md](README.md) for workflow, and reference files (`_*.md`) for conventions and data rules.

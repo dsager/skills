@@ -23,7 +23,7 @@ Generate stakeholder view
 | Health thresholds & scoring | [_data-reference.md](_data-reference.md) |
 | Emoji & labeling rules | [_shared-conventions.md](_shared-conventions.md) |
 | Formatting patterns | [_template-fragments.md](_template-fragments.md) |
-| Report structure | [templates/](templates/) |
+| Report structure | [assets/templates/](assets/templates/) |
 
 ## Essential Rules (Quick Lookup)
 

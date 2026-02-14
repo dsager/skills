@@ -1,6 +1,6 @@
 # Stakeholder Report Template
 
-Use this structure for `audience: stakeholder` reports. See [_template-fragments.md](../_template-fragments.md) for formatting patterns.
+Use this structure for `audience: stakeholder` reports. See [_template-fragments.md](../../_template-fragments.md) for formatting patterns.
 
 ---
 
@@ -17,7 +17,7 @@ Collaborative. Frame issues as shared problems needing collective action, not te
 
 ## Conventions
 
-See [_shared-conventions.md](../_shared-conventions.md) for:
+See [_shared-conventions.md](../../_shared-conventions.md) for:
 - Metric labeling (e.g., Sprint % → Delivery Rate)
 - Qualifier patterns (solution-oriented, ≤5 words)
 - What to omit in stakeholder view
@@ -48,7 +48,7 @@ Each card:
     - Gradient fill matching health status color (green=healthy, yellow=watch, red=risk), subtle opacity
     - Sparkline stroke slightly more visible than fill
   - 3-4 key metric rows: Delivery, Quality, Security
-    - Each: label + value + brief qualifier (per [_shared-conventions.md](../_shared-conventions.md))
+    - Each: label + value + brief qualifier (per [_shared-conventions.md](../../_shared-conventions.md))
 ```
 
 ### Slide 3: Dependencies & Blockers

@@ -66,6 +66,7 @@ Executive reports **never** show 🟠 items (resolved in review step).
 
 Ideas and enhancements under consideration.
 
+### Metrics & Features
 - [ ] SAFe metrics: PI Predictability, Feature cycle time, Program velocity
 - [ ] "vs. last report" delta mode
 - [ ] Per-BU rollups for VP-level reporting
@@ -75,3 +76,8 @@ Ideas and enhancements under consideration.
 - [ ] NPS as Tier 2 when consistently captured
 - [ ] Group auto-detection from BU + sprint cadence (no registry)
 - [ ] Automation: email/Slack delivery, lean web app, scheduled runs
+
+### Scripts (optional helpers)
+- [ ] **CSV Preprocessor** — Convert European number format to standard format (`92,51 %` → `92.51%`), normalize dates, strip NBSP characters. Would eliminate manual preprocessing step.
+- [ ] **CSV Validator** — Check required columns, validate data types, identify in-progress sprints, flag suspicious values (coverage >100%, negatives). Provides early error detection.
+- [ ] **Threshold Calculator** — Analyze historical CSV data to suggest custom thresholds based on percentiles/distributions per project or portfolio. Data-driven threshold tuning.

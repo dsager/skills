@@ -13,10 +13,11 @@ sprint-health-report/
 ├── _shared-conventions.md      # Common patterns across all audiences
 ├── _template-fragments.md      # Reusable formatting patterns
 ├── _data-reference.md          # Thresholds, scoring, heuristics
-├── templates/
-│   ├── operational-report.md   # Full detail report template
-│   ├── executive-report.md     # Executive slide deck template
-│   └── stakeholder-report.md   # Cross-team report template
+├── assets/
+│   └── templates/
+│       ├── operational-report.md   # Full detail report template
+│       ├── executive-report.md     # Executive slide deck template
+│       └── stakeholder-report.md   # Cross-team report template
 └── examples/                   # Sample outputs
 ```
 
@@ -28,7 +29,7 @@ sprint-health-report/
 3. Review `_shared-conventions.md` for emoji, labeling, and audience rules
 
 **Generating a specific report:**
-1. Reference the appropriate `templates/[audience]-report.md`
+1. Reference the appropriate `assets/templates/[audience]-report.md`
 2. Apply patterns from `_template-fragments.md` for consistent formatting
 3. Apply rules from `_shared-conventions.md` for qualifiers and omissions
 4. Apply thresholds from `_data-reference.md` for health scoring
@@ -38,7 +39,7 @@ sprint-health-report/
 1. **Single Source of Truth**: Each concept lives in one place
    - Emoji conventions → `_shared-conventions.md`
    - Health thresholds → `_data-reference.md`
-   - Report structure → `templates/`
+   - Report structure → `assets/templates/`
 
 2. **Reference, Don't Duplicate**: Templates reference shared files instead of repeating content
 
@@ -70,5 +71,5 @@ sprint-health-report/
 - All reports use updated values
 
 **To update report structure**:
-- Edit specific template in `templates/`
+- Edit specific template in `assets/templates/`
 - References to shared patterns remain valid

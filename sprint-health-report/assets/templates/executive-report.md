@@ -1,6 +1,6 @@
 # Executive Slide Deck Template
 
-Use this structure for `audience: executive` HTML slide decks. See [_template-fragments.md](../_template-fragments.md) for formatting patterns.
+Use this structure for `audience: executive` HTML slide decks. See [_template-fragments.md](../../_template-fragments.md) for formatting patterns.
 
 ---
 
@@ -15,7 +15,7 @@ Use this structure for `audience: executive` HTML slide decks. See [_template-fr
 
 ## Conventions
 
-See [_shared-conventions.md](../_shared-conventions.md) for:
+See [_shared-conventions.md](../../_shared-conventions.md) for:
 - Emoji usage and visual anchors
 - Metric labeling (e.g., Sprint % → Delivery Rate)
 - Qualifier patterns (solution-oriented, ≤5 words)
@@ -36,11 +36,11 @@ See [_shared-conventions.md](../_shared-conventions.md) for:
 [H2] Project Health
 
 [3-column card grid, one per project]
-Each card (see [_template-fragments.md](../_template-fragments.md) for format):
+Each card (see [_template-fragments.md](../../_template-fragments.md) for format):
   - Project name + health badge (✅ HEALTHY / ⚠️ WATCH / 🚨 AT RISK)
   - 3-4 key metrics only: Delivery, Security, Coverage, Team
   - Each metric: emoji status + value + brief qualifier
-  - Qualifiers per [_shared-conventions.md](../_shared-conventions.md)
+  - Qualifiers per [_shared-conventions.md](../../_shared-conventions.md)
 ```
 
 ### Slide 3: Delivery Trajectory
