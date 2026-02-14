@@ -134,6 +134,9 @@ Ideas and enhancements under consideration.
 - [ ] Group auto-detection from BU + sprint cadence (no registry)
 - [ ] Automation: email/Slack delivery, lean web app, scheduled runs
 
+### Events & Context
+- [ ] **Event log** — Record events that affect sprint interpretation (PI planning, holidays, team changes, reorgs, major releases). Could be a simple markdown file or structured format that the skill reads alongside the CSV. Would improve heuristic accuracy and reduce false flags.
+
 ### Scripts (optional helpers)
 - [ ] **CSV Preprocessor** — Convert European number format to standard format (`92,51 %` → `92.51%`), normalize dates, strip NBSP characters. Would eliminate manual preprocessing step.
 - [ ] **CSV Validator** — Check required columns, validate data types, identify in-progress sprints, flag suspicious values (coverage >100%, negatives). Provides early error detection.

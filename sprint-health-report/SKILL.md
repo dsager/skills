@@ -26,14 +26,23 @@ Generates actionable executive summaries of software development project health 
 
 ## Suggested workflow
 
-When the user asks for a report, guide them through this sequence. Each step builds on the previous.
+**Use one conversation per sprint cycle.** This keeps context (CSV data, review feedback, Slack responses) flowing naturally through all steps.
 
-1. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠). Source of truth. Generate this first.
-2. **Review** — User reviews the operational report and provides context or corrections (e.g. known causes for spikes, resolved items). Incorporate feedback; this context carries into steps 3 and 4.
-3. **Executive report** (`audience: executive`, `format: html` or `markdown`) — Solutions-first, no 🟠 unverified alerts. Every problem has a solution. Generate only after review step (or explicit user request).
-4. **Stakeholder report** (`audience: stakeholder`, optional) — Cross-team focus, dependencies, PI-level. Omit team internals.
+### Per-sprint conversation flow
 
-**Rules:** Always start with step 1 (operational). Do not skip to executive or stakeholder without a reviewed operational report unless the user explicitly asks. For a quick scan only, step 1 with `projects: ALL` is enough.
+1. **Upload CSV** — attach the sprint data export for this cycle.
+2. **Operational report** (`audience: operational`, `format: markdown`) — Full analysis, all metrics, fact-check tags (🔵/🟠), Slack draft messages. Source of truth. Generate this first.
+3. **Send Slack drafts** — copy the draft messages to the relevant team leads, product owners, and agile coaches.
+4. **Collect responses** — as replies come in, paste them into the conversation. The agent incorporates acknowledgements, corrections, and context into the reviewed report. This is the review step — repeat as needed until satisfied.
+5. **Executive report** (`audience: executive`, `format: html` or `markdown`) — Solutions-first, no 🟠 unverified alerts. Every problem has a solution. Generate only after review step (or explicit user request).
+6. **Stakeholder report** (`audience: stakeholder`, optional) — Cross-team focus, dependencies, PI-level. Omit team internals.
+
+### Rules
+
+- Always start with step 2 (operational). Do not skip to executive or stakeholder without a reviewed operational report unless the user explicitly asks.
+- For a quick scan only, step 2 with `projects: ALL` is enough.
+- Slack responses pasted into the conversation count as review input — no separate review format needed.
+- If a 🟠 verify item is confirmed or denied via Slack, update the report accordingly (confirm → 🔵, deny → exclude or correct).
 
 ---
 
