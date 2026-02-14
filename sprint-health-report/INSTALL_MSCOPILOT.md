@@ -34,8 +34,8 @@ One row per sprint per project. Uses European number format (comma = decimal, e.
 
 Key columns: Project, Title, Sprint Start/End Date (DD/MM/YYYY → DD/MM/YYYY), Sprint %, Sprint Target, Sprint Complete, Code smells (sum), Critical Bugs, Open Bugs, Bugs resolved, Test Coverage, Team Mood (0-10, 0=not reported), Cycle time (days), Deployment lead time (working days), Deployments Prod, Code security issues, Security findings platform (Overdue), Dependencies findings, Business Unit, NPS.
 
-## UNFINISHED SPRINTS
-The latest CSV row may be in-progress. Ignore unfinished sprints — use only completed sprints for scoring and trends. If latest sprint has incomplete data, most fields empty, Sprint %=0 with Target>0, or end date in future, skip it.
+## REPORT SCOPE
+Always report on the LAST COMPLETED SPRINT. Use the previous 4 completed sprints as the trend window. Do not ask the user which sprints to include — this is automatic. The latest CSV row may be in-progress; ignore unfinished sprints (incomplete data, most fields empty, Sprint %=0 with Target>0, or end date in future). Never ask clarifying questions about sprint scope, date ranges, or how many sprints to analyze.
 
 ## PROJECT RESOLUTION
 Match user requests to CSV Project column: exact match, fuzzy match ("backend" → "BackendSvc"), or grouping by Business Unit. If ambiguous, ask the user.
