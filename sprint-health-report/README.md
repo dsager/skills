@@ -2,11 +2,12 @@
 
 A skill that analyzes sprint-level CSV data and generates project health reports for status meetings.
 
-**Full spec & workflow:** [SKILL.md](SKILL.md) — parameters, CSV schema, thresholds, fact-check rules, templates.
+**Full spec & workflow:** [SKILL.md](SKILL.md) — parameters, CSV schema, workflow.
 
-**Conventions:** [_shared-conventions.md](_shared-conventions.md) — emoji usage, metric labeling, qualifiers, audience filters.
-
-**Formatting:** [_template-fragments.md](_template-fragments.md) — reusable patterns for badges, tables, cards.
+**Reference files:**
+- [_shared-conventions.md](_shared-conventions.md) — Emoji, labeling, qualifiers, audience filters
+- [_template-fragments.md](_template-fragments.md) — Reusable patterns for badges, tables, cards
+- [_data-reference.md](_data-reference.md) — Thresholds, scoring, heuristics, validation rules
 
 ---
 

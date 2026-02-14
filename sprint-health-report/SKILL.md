@@ -19,12 +19,13 @@ Generates actionable executive summaries of software development project health 
 | `README.md` | How to use the skill: workflow, commands, tips. |
 | `_shared-conventions.md` | Common patterns: emoji usage, metric labeling, qualifiers, audience filters. |
 | `_template-fragments.md` | Reusable formatting patterns: badges, tables, cards, headers. |
+| `_data-reference.md` | Quick reference: thresholds, scoring, heuristics, validation rules. |
 | `templates/operational-report.md` | Template for Operational report. |
 | `templates/executive-report.md` | Template for Executive HTML slide deck. |
 | `templates/stakeholder-report.md` | Template for Stakeholder report. |
 | `examples/` | Sample outputs for reference. |
 
-**Start here**: Read this file for the analysis spec. See [README.md](README.md) for workflow and [_shared-conventions.md](_shared-conventions.md) for common patterns.
+**Start here**: Read this file for the analysis spec. See [README.md](README.md) for workflow and reference files (`_*.md`) for conventions and data rules.
 
 ## Suggested workflow
 
@@ -121,61 +122,15 @@ One row per sprint per project. Key columns:
 
 ## Health Thresholds
 
-Calibrated for typical agile portfolios; tune thresholds to your data if needed.
+See [_data-reference.md](_data-reference.md) for complete thresholds, scoring formula, trend escalation rules, and built-in heuristics.
 
-### Absolute
-
-| Metric | ✅ Healthy | ⚠️ Watch | 🚨 Alert |
-|--------|-----------|----------|----------|
-| Sprint % | 75–115% | 60–75% or 115–140% | <60% or >140% |
-| Critical Bugs | 0 | 1 | ≥2 |
-| Open Bugs | ≤5 | 6–15 | >15 |
-| Test Coverage | ≥85% | 75–85% | <75% |
-| Team Mood | ≥7.5 | 6.0–7.5 | <6.0 |
-| Cycle Time | ≤5d | 5–10d | >10d |
-| Security Overdue | 0 | 1–3 | >3 |
-| Code Security | 0 | 1–3 | >3 |
-
-### Trend Escalation (override upward only)
-
-| Condition | Effect |
-|-----------|--------|
-| Any metric >20% drop sprint-over-sprint | Escalate one level |
-| Team Mood ≥1.5pt drop in window | Auto-🚨 |
-| Test Coverage ≥3pp drop in window | ⚠️ minimum |
-| Sprint % >40pp swing between sprints | ⚠️ (unstable) |
-| Open Bugs net +5 in window | Escalate one level |
-| Code Smells +30% over window | ⚠️ minimum |
-
-### Scoring
-
-`✅=0  ⚠️=1  🚨=2`
-
-**Weighted Score** = Σ(status × tier_weight) / Σ(tier_weight for reported metrics)
-
-| Score | Health |
-|-------|--------|
-| 0.0–0.3 | ✅ Healthy |
-| 0.3–0.8 | ⚠️ Needs Attention |
-| 0.8+ | 🚨 At Risk |
-
-**Overrides**: T1 at 🚨 → project 🚨. ≥3 metrics at ⚠️ → project ⚠️ min.
+**Quick reference**: Thresholds calibrated for typical agile portfolios. Tune to your data if needed.
 
 ---
 
 ## Data Fact-Check
 
-Run **before** scoring. Prevents false alerts from reaching reports.
-
-### Validation Rules
-
-| Check | Rule | Action |
-|-------|------|--------|
-| Magnitude spike | >3× project historical max | 🟠 `VERIFY` |
-| Sudden appearance | 0/empty 3+ sprints then spikes | 🟠 `VERIFY` |
-| Impossible value | Coverage >100%, Sprint % >300%, negatives | `EXCLUDE` |
-| Cross-project outlier | >5× portfolio median | 🟠 `VERIFY` |
-| Completeness | >50% metrics empty in "completed" sprint | 🟠 `VERIFY` |
+See [_data-reference.md](_data-reference.md) for validation rules. Run **before** scoring to prevent false alerts.
 
 **Confidence levels & audience filtering**: See [_shared-conventions.md](_shared-conventions.md).
 
@@ -183,14 +138,7 @@ Run **before** scoring. Prevents false alerts from reaching reports.
 
 ## Built-in Heuristics
 
-| Pattern | Handling |
-|---------|----------|
-| Holiday sprints (mid-Dec–mid-Jan, Aug) | Note "holiday period", don't alarm |
-| IP/Innovation sprints | Exclude from velocity trend |
-| Ramp-up (first 3-4 sprints) | Relax Sprint % green to 60-115% |
-| Sprint title context | Extract and surface |
-| Zero deployments across all sprints | Flag once as "tracking may not be configured" |
-| Team Mood = 0 ≥2 sprints | "Action: Agile Coach to review team processes" |
+See [_data-reference.md](_data-reference.md) for complete heuristics list. Key patterns: holiday sprints, IP sprints, ramp-up periods, zero deployments, mood tracking gaps.
 
 ---
 
