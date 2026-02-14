@@ -1,6 +1,6 @@
 # Stakeholder Report Template
 
-Use this structure for `audience: stakeholder` reports.
+Use this structure for `audience: stakeholder` reports. See [_template-fragments.md](../_template-fragments.md) for formatting patterns.
 
 ---
 
@@ -11,22 +11,16 @@ Use this structure for `audience: stakeholder` reports.
 - PI-level progress
 - Shared risks and infrastructure concerns
 
-## What to Omit
-
-- Team internals: mood details, code smells, individual coverage
-- Data quality / tooling issues
-- Individual personnel situations
-- Unverified (🟠) alerts — these should be resolved during the review step (Step 2) before reaching stakeholder level. If an item is still unresolved, exclude the affected metric from aggregate numbers and note briefly why (e.g. "one project excluded pending data confirmation").
-
 ## Tone
 
 Collaborative. Frame issues as shared problems needing collective action, not team failures.
 
-## Language
+## Conventions
 
-Use plain language for metrics. Avoid internal jargon when a clearer term exists:
-- "Sprint %" → **Delivery Rate** (completed vs planned story points) — label charts and tables accordingly
-- Keep standard SAFe terms (PI, ART) where the audience expects them
+See [_shared-conventions.md](../_shared-conventions.md) for:
+- Metric labeling (e.g., Sprint % → Delivery Rate)
+- Qualifier patterns (solution-oriented, ≤5 words)
+- What to omit in stakeholder view
 
 ---
 
@@ -54,11 +48,7 @@ Each card:
     - Gradient fill matching health status color (green=healthy, yellow=watch, red=risk), subtle opacity
     - Sparkline stroke slightly more visible than fill
   - 3-4 key metric rows: Delivery, Quality, Security
-    - Each: label + value + brief qualifier (under 5 words, solution-oriented)
-  - Qualifiers follow executive template conventions:
-    ✅ "82%"                     (no qualifier needed)
-    ⚠️ "67% — recovering"       (not "dropped 11pp")
-    🚨 "50% — dep. blocked"     (not "critically low")
+    - Each: label + value + brief qualifier (per [_shared-conventions.md](../_shared-conventions.md))
 ```
 
 ### Slide 3: Dependencies & Blockers

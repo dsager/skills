@@ -17,12 +17,14 @@ Generates actionable executive summaries of software development project health 
 |------|---------|
 | `SKILL.md` | This file. Entry point, analysis logic, prompt template. |
 | `README.md` | How to use the skill: workflow, commands, tips. |
+| `_shared-conventions.md` | Common patterns: emoji usage, metric labeling, qualifiers, audience filters. |
+| `_template-fragments.md` | Reusable formatting patterns: badges, tables, cards, headers. |
 | `templates/operational-report.md` | Template for Operational report. |
 | `templates/executive-report.md` | Template for Executive HTML slide deck. |
 | `templates/stakeholder-report.md` | Template for Stakeholder report. |
 | `examples/` | Sample outputs for reference. |
 
-**Start here**: Read this file for the analysis spec. See [README.md](README.md) for detailed workflow and tips.
+**Start here**: Read this file for the analysis spec. See [README.md](README.md) for workflow and [_shared-conventions.md](_shared-conventions.md) for common patterns.
 
 ## Suggested workflow
 
@@ -61,7 +63,7 @@ Do not maintain or refer to a cluster registry in the skill. Use the CSV and com
 
 ## Input Data
 
-**In-progress sprints**: The most recent row(s) in the CSV may be for the **current sprint**—one that has not finished yet. That sprint can have incomplete or partial data (e.g. low Sprint %, many fields empty). When generating a report, **ignore unfinished sprints** and use only **completed** sprints. The report should be based on the **last finished sprint** (and the trend window of completed sprints before it). If in doubt, treat the latest sprint as potentially in-progress and prefer the previous sprint as "last completed" unless the data clearly indicates completion.
+**Critical rule for in-progress sprints**: The most recent CSV row(s) may be unfinished (current sprint). **Only use completed sprints** for reporting. Treat latest sprint as potentially in-progress; prefer previous sprint as "last completed" unless data clearly shows completion.
 
 ### CSV Schema
 
@@ -92,18 +94,18 @@ One row per sprint per project. Key columns:
 
 ### Data Parsing Rules
 
-1. European numbers: comma = decimal (`92,51 %` → 92.51). Strip NBSP.
-2. **Finished vs unfinished sprints**: Only use **finished** (completed) sprints for the report. Treat the latest sprint in the data as possibly in-progress—if it has incomplete data (most fields empty, or Sprint % = 0 with Target > 0, or end date in the future), **ignore it** and take the last finished sprint as the report baseline. Incomplete/unfinished sprints are skipped for scoring and trends.
-3. Team Mood = 0 → not reported, exclude from scoring.
-4. Code Smells: trend direction only, never compare absolutes across projects.
-5. <3 completed sprints → "insufficient data", skip trends.
-6. Extract context from sprint titles when relevant.
-7. Use project names exactly as they appear in the CSV.
+1. **European numbers**: comma = decimal (`92,51 %` → 92.51). Strip NBSP.
+2. **Finished sprints only**: Ignore in-progress sprints (incomplete data, Sprint % = 0 with Target > 0, or future end date).
+3. **Team Mood = 0**: Not reported, exclude from scoring.
+4. **Code Smells**: Trend direction only, never compare absolutes across projects.
+5. **Trend minimum**: <3 completed sprints → "insufficient data".
+6. **Sprint context**: Extract context from sprint titles when relevant.
+7. **Project names**: Use exactly as they appear in CSV (see [_shared-conventions.md](_shared-conventions.md)).
 
 ### Portfolio and single-project scope
 
-- **Portfolio report** (`projects = ALL` or portfolio overview): Include only **active** projects. A project is active if it has at least one **completed** sprint with an end date within the **past month or two** (e.g. last 60 days from the report date). Projects with no completed sprint in that window are excluded from the portfolio report so the overview reflects currently active work.
-- **Single-project report** (user asks for a specific project): If the requested project has **no recent data** (e.g. no completed sprint in the past month or two), still produce the report from the latest available data but **add a clear note** at the top (e.g. in Executive Summary or Data Quality) that the project has no recent sprint data and the report is based on the last available sprint, with the date of that sprint. This avoids implying current health when the project may be dormant or tracking may have stopped.
+- **Portfolio** (`projects = ALL`): Include only **active** projects (completed sprint within past 60 days from report date).
+- **Single-project**: If no recent data (no completed sprint in past 60 days), still produce report but note clearly that project may be dormant, with date of last sprint.
 
 ---
 
@@ -171,24 +173,11 @@ Run **before** scoring. Prevents false alerts from reaching reports.
 |-------|------|--------|
 | Magnitude spike | >3× project historical max | 🟠 `VERIFY` |
 | Sudden appearance | 0/empty 3+ sprints then spikes | 🟠 `VERIFY` |
-| Impossible value | Coverage >100%, Sprint % >300%, negatives | `EXCLUDE` from scoring |
+| Impossible value | Coverage >100%, Sprint % >300%, negatives | `EXCLUDE` |
 | Cross-project outlier | >5× portfolio median | 🟠 `VERIFY` |
 | Completeness | >50% metrics empty in "completed" sprint | 🟠 `VERIFY` |
 
-### Confidence Levels
-
-| Level | Meaning |
-|-------|---------|
-| 🔵 High confidence | Consistent trend (3+ sprints) or multi-metric corroboration |
-| 🟠 Needs verification | Single data point, first occurrence, magnitude outlier |
-
-### Audience Filtering
-
-| Audience | 🔵 High | 🟠 Needs verification |
-|----------|---------|----------------------|
-| `operational` | Full detail | Full detail + verify tag |
-| `executive` | Shown with solution | **Omitted** |
-| `stakeholder` | Shown if cross-team | Omitted |
+**Confidence levels & audience filtering**: See [_shared-conventions.md](_shared-conventions.md).
 
 ---
 
@@ -226,14 +215,16 @@ Annotated issues still show status but narrative shifts from "investigate" to "m
 
 ## Audience Perspectives
 
+See [_shared-conventions.md](_shared-conventions.md) for common omissions and patterns.
+
 ### `operational` — Operational
-All metrics, trends, flags, data quality. Concrete actions with owner hints. Fact-check flags with verify tags.
+All metrics, trends, flags, data quality. Concrete actions with owner hints. All fact-check flags including verify tags.
 
 ### `executive` — Executive
-Lead with solutions. Every problem has a plan. Omit: unverified alerts, data noise, resolved personal issues. Graphs > tables. Concise.
+Solutions-first. Every problem has a plan. Graphs > tables. Concise. (See _shared-conventions.md for omissions.)
 
 ### `stakeholder` — Stakeholder
-Cross-team focus: delivery, dependencies, PI progress. Omit team internals. Collaborative framing.
+Cross-team focus: delivery, dependencies, PI progress. Collaborative framing. (See _shared-conventions.md for omissions.)
 
 ---
 
@@ -243,10 +234,10 @@ Before finalizing any output, verify:
 
 - **Accuracy**: Data points match CSV, trends correct, scores right, annotations reflected
 - **Fact-check**: Confidence levels assigned, unverified tagged, impossible values excluded
-- **Audience**: Content appropriate for selected audience
+- **Audience**: Content appropriate per [_shared-conventions.md](_shared-conventions.md)
 - **Presentation**: Scannable, one message per slide (if applicable), charts readable
-- **Emoji**: Consistent per conventions, max 1 per line, functional not decorative
-- **Names**: Project names exactly as in the CSV; group/ART labels from user or context
+- **Emoji**: Per [_shared-conventions.md](_shared-conventions.md) — max 1 per line, functional not decorative
+- **Names**: Project names per [_shared-conventions.md](_shared-conventions.md)
 
 Revise if any check fails.
 
@@ -254,19 +245,5 @@ Revise if any check fails.
 
 ## Emoji Conventions
 
-| Emoji | Meaning | Usage |
-|-------|---------|-------|
-| ✅ | Healthy / resolved | Status, resolved items |
-| ⚠️ | Watch | Status, verification |
-| 🚨 | Alert / at risk | Status, urgent items |
-| 👍 | Positive | Highlights |
-| 📈 | Improving | Trends |
-| 📉 | Declining | Trends |
-| ➡️ | Stable | Trends |
-| 🔵 | High confidence | Fact-check |
-| 🟠 | Needs verification | Fact-check |
-| 🔒 | Security | Security items |
-| 🎯 | Action item | Recommendations |
-
-Max 1 per line/cell. Never in prose. Functional only.
+See [_shared-conventions.md](_shared-conventions.md) for full emoji usage guidelines.
 
