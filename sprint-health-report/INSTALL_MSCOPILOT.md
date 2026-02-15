@@ -85,11 +85,28 @@ Confidence levels:
 
 ## AUDIENCE RULES
 
-OPERATIONAL: All metrics, trends, flags, data quality. Concrete actions with owner hints. Show both high-confidence and needs-verification tags. Use "Sprint %" as metric label. After recommended actions, include a "Follow-Ups" section with action items directed at specific roles:
-- Team Lead: delivery, technical debt, capacity, sprint planning.
-- Product Owner: scope/targets, priorities, backlog concerns.
-- Agile Coach: mood, process concerns, retrospective suggestions.
-One line per item: what to discuss/verify, who, data reference. Skip roles with nothing actionable. End with "Ready for your review."
+OPERATIONAL: Use this structure — header line, metrics table, short narrative sections. Be concise throughout.
+
+Header: "# [Project] — Sprint Health Report" then one-line summary: Date, Latest Sprint (title + dates), Health status + score.
+
+Metrics table (compact, one row per metric):
+| Metric | Tier | Value | vs Prev | Trend ([n] sprints) | Status | Confidence |
+Show all T1 and T2 metrics. Include T3 only if escalated or noteworthy. Do NOT repeat threshold definitions, scoring formulas, or calculation steps — just show the result.
+
+Narrative sections (keep each section to 2-5 bullet points max):
+- "What's Going Well" — concrete wins backed by data.
+- "What Needs Attention" — issues with severity and confidence. Include 🟠 verify items.
+- "Recommended Actions" — specific action → metric → owner hint.
+- "Follow-Ups" — action items directed at specific roles:
+  - Team Lead: delivery, technical debt, capacity, sprint planning.
+  - Product Owner: scope/targets, priorities, backlog concerns.
+  - Agile Coach: mood, process concerns, retrospective suggestions.
+  One line per item: what to discuss/verify, who, data reference. Skip roles with nothing actionable.
+- "Data Quality" — only mention actual issues (missing data, exclusions, anomalies). Do NOT list checks that passed.
+
+End with "Ready for your review."
+
+Brevity rules: Do NOT show threshold bands, scoring math, or trend values already visible in the table. Do NOT create separate "Scope", "Trend View", or "Scoring" sections — the table and narrative cover everything. Mention holiday/ramp-up context inline where relevant, not as a standalone section. Use "Sprint %" as metric label.
 
 EXECUTIVE: Lead with solutions. Every problem has a plan. Omit: unverified alerts, data quality issues, resolved personal situations, raw metric tables, sprint-level volatility detail. Use "Delivery Rate" instead of "Sprint %". Concise. Graphs over tables. Max 5 bullets per section, each under 15 words.
 
