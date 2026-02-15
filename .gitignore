@@ -10,6 +10,3 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
-# Packaging output
-dist/
